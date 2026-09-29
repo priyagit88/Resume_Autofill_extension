@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Job Autofill – Edit Profile</title>
+  <style>
+    body {font-family: Arial, Helvetica, sans-serif; margin:0; padding:16px; background:#f5f5f5;}
+    h1 {font-size:20px; margin-bottom:12px;}
+    .section {background:#fff; padding:12px; margin-bottom:12px; border-radius:8px; box-shadow:0 2px 4px rgba(0,0,0,0.1);}
+    label {display:block; margin-top:8px; font-weight:bold;}
+    input, textarea, select {width:100%; padding:6px; margin-top:4px; border:1px solid #ccc; border-radius:4px;}
+    button {margin-top:12px; padding:8px 12px; background:#4a90e2; color:#fff; border:none; border-radius:4px; cursor:pointer;}
+    .status {margin-top:8px; font-size:12px; color:#555;}
+  </style>
+</head>
+<body>
+  <h1>Edit Profile</h1>
+  <form id="profile-form">
+    <div class="section">
+      <h2>Personal Details</h2>
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" name="fullName" />
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" name="firstName" />
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName" />
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" />
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" />
+      <label for="address">Address</label>
+      <input type="text" id="address" name="address" />
+      <label for="city">City</label>
+      <input type="text" id="city" name="city" />
+      <label for="state">State</label>
+      <input type="text" id="state" name="state" />
+      <label for="country">Country</label>
+      <input type="text" id="country" name="country" />
+    </div>
+    <div class="section">
+      <h2>Professional Details</h2>
+      <label for="linkedin">LinkedIn</label>
+      <input type="url" id="linkedin" name="linkedin" />
+      <label for="github">GitHub</label>
+      <input type="url" id="github" name="github" />
+      <label for="portfolio">Portfolio</label>
+      <input type="url" id="portfolio" name="portfolio" />
+      <label for="skills">Skills (comma separated)</label>
+      <input type="text" id="skills" name="skills" />
+      <label for="currentJobTitle">Current Job Title</label>
+      <input type="text" id="currentJobTitle" name="currentJobTitle" />
+      <label for="yearsExperience">Years of Experience</label>
+      <input type="number" id="yearsExperience" name="yearsExperience" min="0" />
+    </div>
+    <div class="section">
+      <h2>Education</h2>
+      <label for="college">College / University</label>
+      <input type="text" id="college" name="college" />
+      <label for="degree">Degree</label>
+      <input type="text" id="degree" name="degree" />
+      <label for="specialization">Specialization</label>
+      <input type="text" id="specialization" name="specialization" />
+      <label for="graduationYear">Graduation Year</label>
+      <input type="number" id="graduationYear" name="graduationYear" min="1900" max="2100" />
+      <label for="cgpa">CGPA</label>
+      <input type="text" id="cgpa" name="cgpa" />
+    </div>
+    <div class="section">
+      <h2>Other Common Details</h2>
+      <label for="expectedSalary">Expected Salary</label>
+      <input type="text" id="expectedSalary" name="expectedSalary" />
+      <label for="noticePeriod">Notice Period</label>
+      <input type="text" id="noticePeriod" name="noticePeriod" />
+      <label for="relocate">Willing to Relocate</label>
+      <select id="relocate" name="relocate">
+        <option value="">--Select--</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+      <label for="workAuth">Work Authorization</label>
+      <input type="text" id="workAuth" name="workAuth" />
+    </div>
+    <button type="submit">Save Profile</button>
+    <div class="status" id="save-status"></div>
+  </form>
+  <script src="options.js"></script>
+</body>
+</html>
