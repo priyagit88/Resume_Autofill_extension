@@ -27,11 +27,11 @@ const FIELD_MAP = {
 
 // Scoring weights (simple)
 const WEIGHTS = {
-  name: 5,
-  id: 5,
-  placeholder: 3,
-  label: 4,
-  aria: 3
+  name: 90,
+  id: 90,
+  placeholder: 70,
+  label: 80,
+  aria: 50
 };
 
 function getLabelText(element) {
@@ -71,8 +71,7 @@ function matchField(element) {
       best = {type, confidence: score, reasons};
     }
   }
-  const maxScore = 5 + 5 + 4 + 3 + 3; // 20
-  const percent = Math.round((best.confidence / maxScore) * 100);
+  const percent = Math.min(100, best.confidence);
   return {type: best.type, confidence: percent, reasons: best.reasons};
 }
 
