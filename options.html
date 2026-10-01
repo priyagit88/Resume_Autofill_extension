@@ -4,84 +4,267 @@
   <meta charset="UTF-8" />
   <title>Job Autofill – Edit Profile</title>
   <style>
-    body {font-family: Arial, Helvetica, sans-serif; margin:0; padding:16px; background:#f5f5f5;}
-    h1 {font-size:20px; margin-bottom:12px;}
-    .section {background:#fff; padding:12px; margin-bottom:12px; border-radius:8px; box-shadow:0 2px 4px rgba(0,0,0,0.1);}
-    label {display:block; margin-top:8px; font-weight:bold;}
-    input, textarea, select {width:100%; padding:6px; margin-top:4px; border:1px solid #ccc; border-radius:4px;}
-    button {margin-top:12px; padding:8px 12px; background:#4a90e2; color:#fff; border:none; border-radius:4px; cursor:pointer;}
-    .status {margin-top:8px; font-size:12px; color:#555;}
+    * { box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 20px; background: #f0f2f5; color: #333; }
+    h1 { font-size: 24px; text-align: center; margin-bottom: 20px; color: #1a1a2e; }
+    h2 { font-size: 16px; margin: 0 0 12px 0; color: #4a90e2; border-bottom: 2px solid #4a90e2; padding-bottom: 6px; }
+    .section { background: #fff; padding: 16px; margin-bottom: 16px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); max-width: 700px; margin-left: auto; margin-right: auto; }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .field { flex: 1; min-width: 200px; margin-bottom: 10px; }
+    .field.full { flex-basis: 100%; }
+    label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 4px; color: #555; }
+    input, textarea, select { width: 100%; padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; transition: border 0.2s; }
+    input:focus, textarea:focus, select:focus { border-color: #4a90e2; outline: none; }
+    textarea { resize: vertical; min-height: 60px; }
+    .btn-row { text-align: center; margin-top: 16px; max-width: 700px; margin-left: auto; margin-right: auto; }
+    button[type="submit"] { padding: 10px 40px; background: #4a90e2; color: #fff; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; transition: background 0.2s; }
+    button[type="submit"]:hover { background: #357abd; }
+    .status {
+      text-align: center;
+      margin-top: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #27ae60;
+      min-height: 24px;
+      transition: all 0.3s ease;
+    }
+    .status.flash {
+      animation: pulseGreen 0.6s ease-in-out;
+    }
+    @keyframes pulseGreen {
+      0% { transform: scale(0.95); opacity: 0.5; }
+      50% { transform: scale(1.05); opacity: 1; color: #1e8449; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .note { font-size: 12px; color: #666; margin-top: 2px; margin-bottom: 10px; line-height: 1.4; }
+    .resume-badge { display: flex; flex-direction: column; gap: 4px; }
   </style>
 </head>
 <body>
   <h1>Edit Profile</h1>
   <form id="profile-form">
+
+    <!-- PERSONAL DETAILS -->
     <div class="section">
       <h2>Personal Details</h2>
-      <label for="fullName">Full Name</label>
-      <input type="text" id="fullName" name="fullName" />
-      <label for="firstName">First Name</label>
-      <input type="text" id="firstName" name="firstName" />
-      <label for="lastName">Last Name</label>
-      <input type="text" id="lastName" name="lastName" />
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" />
-      <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" name="phone" />
-      <label for="address">Address</label>
-      <input type="text" id="address" name="address" />
-      <label for="city">City</label>
-      <input type="text" id="city" name="city" />
-      <label for="state">State</label>
-      <input type="text" id="state" name="state" />
-      <label for="country">Country</label>
-      <input type="text" id="country" name="country" />
+      <div class="row">
+        <div class="field"><label for="fullName">Full Name</label><input type="text" id="fullName" name="fullName" /></div>
+        <div class="field"><label for="firstName">First Name</label><input type="text" id="firstName" name="firstName" /></div>
+        <div class="field"><label for="lastName">Last Name</label><input type="text" id="lastName" name="lastName" /></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" /></div>
+        <div class="field"><label for="phone">Phone Number</label><input type="tel" id="phone" name="phone" /></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="dob">Date of Birth</label><input type="date" id="dob" name="dob" min="1940-01-01" max="2026-12-31" /></div>
+        <div class="field"><label for="gender">Gender</label>
+          <select id="gender" name="gender">
+            <option value="">--Select--</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+        </div>
+        <div class="field"><label for="nationality">Nationality</label><input type="text" id="nationality" name="nationality" /></div>
+      </div>
+      <div class="row">
+        <div class="field full"><label for="address">Address</label><input type="text" id="address" name="address" /></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="city">City</label><input type="text" id="city" name="city" /></div>
+        <div class="field"><label for="state">State</label><input type="text" id="state" name="state" /></div>
+        <div class="field"><label for="country">Country</label><input type="text" id="country" name="country" /></div>
+        <div class="field"><label for="pincode">PIN Code / ZIP</label><input type="text" id="pincode" name="pincode" /></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="maritalStatus">Marital Status</label>
+          <select id="maritalStatus" name="maritalStatus">
+            <option value="">--Select--</option>
+            <option value="Single">Single</option>
+            <option value="Married">Married</option>
+          </select>
+        </div>
+        <div class="field"><label for="languages">Languages Known</label><input type="text" id="languages" name="languages" placeholder="English, Hindi, Kannada" /></div>
+      </div>
     </div>
+
+    <!-- PROFESSIONAL DETAILS -->
     <div class="section">
       <h2>Professional Details</h2>
-      <label for="linkedin">LinkedIn</label>
-      <input type="url" id="linkedin" name="linkedin" />
-      <label for="github">GitHub</label>
-      <input type="url" id="github" name="github" />
-      <label for="portfolio">Portfolio</label>
-      <input type="url" id="portfolio" name="portfolio" />
-      <label for="skills">Skills (comma separated)</label>
-      <input type="text" id="skills" name="skills" />
-      <label for="currentJobTitle">Current Job Title</label>
-      <input type="text" id="currentJobTitle" name="currentJobTitle" />
-      <label for="yearsExperience">Years of Experience</label>
-      <input type="number" id="yearsExperience" name="yearsExperience" min="0" />
+      <div class="row">
+        <div class="field"><label for="linkedin">LinkedIn URL</label><input type="url" id="linkedin" name="linkedin" /></div>
+        <div class="field"><label for="github">GitHub URL</label><input type="url" id="github" name="github" /></div>
+        <div class="field"><label for="portfolio">Portfolio URL</label><input type="url" id="portfolio" name="portfolio" /></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="currentJobTitle">Current Job Title</label><input type="text" id="currentJobTitle" name="currentJobTitle" /></div>
+        <div class="field"><label for="currentCompany">Current Company</label><input type="text" id="currentCompany" name="currentCompany" /></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="yearsExperience">Years of Experience</label><input type="number" id="yearsExperience" name="yearsExperience" min="0" /></div>
+        <div class="field"><label for="skills">Skills (comma separated)</label><input type="text" id="skills" name="skills" placeholder="Java, Python, React, SQL" /></div>
+      </div>
     </div>
+
+    <!-- 10TH / SSLC DETAILS -->
     <div class="section">
-      <h2>Education</h2>
-      <label for="college">College / University</label>
-      <input type="text" id="college" name="college" />
-      <label for="degree">Degree</label>
-      <input type="text" id="degree" name="degree" />
-      <label for="specialization">Specialization</label>
-      <input type="text" id="specialization" name="specialization" />
-      <label for="graduationYear">Graduation Year</label>
-      <input type="number" id="graduationYear" name="graduationYear" min="1900" max="2100" />
-      <label for="cgpa">CGPA</label>
-      <input type="text" id="cgpa" name="cgpa" />
+      <h2>10th / SSLC Details</h2>
+      <div class="row">
+        <div class="field"><label for="tenthSchool">School Name</label><input type="text" id="tenthSchool" name="tenthSchool" /></div>
+        <div class="field"><label for="tenthBoard">Board</label><input type="text" id="tenthBoard" name="tenthBoard" placeholder="CBSE / ICSE / State Board" /></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="tenthPercentage">Percentage / CGPA</label><input type="text" id="tenthPercentage" name="tenthPercentage" /></div>
+        <div class="field"><label for="tenthStartYear">Start Year</label><input type="number" id="tenthStartYear" name="tenthStartYear" min="1950" max="2100" placeholder="e.g. 2018" /></div>
+        <div class="field"><label for="tenthYear">Passing Year / End Year</label><input type="number" id="tenthYear" name="tenthYear" min="1950" max="2100" placeholder="e.g. 2020" /></div>
+      </div>
     </div>
+
+    <!-- 12TH / PUC DETAILS -->
     <div class="section">
-      <h2>Other Common Details</h2>
-      <label for="expectedSalary">Expected Salary</label>
-      <input type="text" id="expectedSalary" name="expectedSalary" />
-      <label for="noticePeriod">Notice Period</label>
-      <input type="text" id="noticePeriod" name="noticePeriod" />
-      <label for="relocate">Willing to Relocate</label>
-      <select id="relocate" name="relocate">
-        <option value="">--Select--</option>
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-      </select>
-      <label for="workAuth">Work Authorization</label>
-      <input type="text" id="workAuth" name="workAuth" />
+      <h2>12th / PUC Details</h2>
+      <div class="row">
+        <div class="field"><label for="twelfthCollege">College / School Name</label><input type="text" id="twelfthCollege" name="twelfthCollege" /></div>
+        <div class="field"><label for="twelfthBoard">Board</label><input type="text" id="twelfthBoard" name="twelfthBoard" placeholder="CBSE / PUC / State Board" /></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="twelfthStream">Stream</label><input type="text" id="twelfthStream" name="twelfthStream" placeholder="Science / Commerce / Arts" /></div>
+        <div class="field"><label for="twelfthPercentage">Percentage / CGPA</label><input type="text" id="twelfthPercentage" name="twelfthPercentage" /></div>
+        <div class="field"><label for="twelfthStartYear">Start Year</label><input type="number" id="twelfthStartYear" name="twelfthStartYear" min="1950" max="2100" placeholder="e.g. 2020" /></div>
+        <div class="field"><label for="twelfthYear">Passing Year / End Year</label><input type="number" id="twelfthYear" name="twelfthYear" min="1950" max="2100" placeholder="e.g. 2022" /></div>
+      </div>
     </div>
-    <button type="submit">Save Profile</button>
-    <div class="status" id="save-status"></div>
+
+    <!-- UG DETAILS -->
+    <div class="section">
+      <h2>UG (Undergraduate) Details</h2>
+      <div class="row">
+        <div class="field"><label for="ugCollege">College / University</label><input type="text" id="ugCollege" name="ugCollege" /></div>
+        <div class="field"><label for="ugDegree">Degree</label><input type="text" id="ugDegree" name="ugDegree" placeholder="B.Tech / B.E / B.Sc / BCA" /></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="ugSpecialization">Specialization / Branch</label><input type="text" id="ugSpecialization" name="ugSpecialization" /></div>
+        <div class="field"><label for="ugCgpa">CGPA / Percentage</label><input type="text" id="ugCgpa" name="ugCgpa" /></div>
+        <div class="field"><label for="ugStartYear">Start Year</label><input type="number" id="ugStartYear" name="ugStartYear" min="1950" max="2100" placeholder="e.g. 2022" /></div>
+        <div class="field"><label for="ugPassoutYear">Passout Year / End Year</label><input type="number" id="ugPassoutYear" name="ugPassoutYear" min="1950" max="2100" placeholder="e.g. 2026" /></div>
+      </div>
+    </div>
+
+    <!-- PG DETAILS -->
+    <div class="section">
+      <h2>PG (Postgraduate) Details</h2>
+      <div class="row">
+        <div class="field"><label for="pgCollege">College / University</label><input type="text" id="pgCollege" name="pgCollege" /></div>
+        <div class="field"><label for="pgDegree">Degree</label><input type="text" id="pgDegree" name="pgDegree" placeholder="M.Tech / MCA / M.Sc / MBA" /></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="pgSpecialization">Specialization / Branch</label><input type="text" id="pgSpecialization" name="pgSpecialization" /></div>
+        <div class="field"><label for="pgCgpa">CGPA / Percentage</label><input type="text" id="pgCgpa" name="pgCgpa" /></div>
+        <div class="field"><label for="pgStartYear">Start Year</label><input type="number" id="pgStartYear" name="pgStartYear" min="1950" max="2100" placeholder="e.g. 2026" /></div>
+        <div class="field"><label for="pgPassoutYear">Passout Year / End Year</label><input type="number" id="pgPassoutYear" name="pgPassoutYear" min="1950" max="2100" placeholder="e.g. 2028" /></div>
+      </div>
+    </div>
+
+    <!-- INTERNSHIP DETAILS -->
+    <div class="section">
+      <h2>Internship Details</h2>
+      <div class="row">
+        <div class="field"><label for="internCompany">Company / Organization</label><input type="text" id="internCompany" name="internCompany" /></div>
+        <div class="field"><label for="internRole">Role / Title</label><input type="text" id="internRole" name="internRole" placeholder="e.g. Software Developer Intern" /></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="internDuration">Duration</label><input type="text" id="internDuration" name="internDuration" placeholder="e.g. 3 months / Jan–Mar 2025" /></div>
+      </div>
+      <div class="row">
+        <div class="field full"><label for="internDescription">Description of Work / Responsibilities</label>
+          <textarea id="internDescription" name="internDescription" rows="3" placeholder="Describe what you did during your internship..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- WORK EXPERIENCE -->
+    <div class="section">
+      <h2>Work Experience (if any)</h2>
+      <div class="row">
+        <div class="field"><label for="expCompany">Company</label><input type="text" id="expCompany" name="expCompany" /></div>
+        <div class="field"><label for="expJobTitle">Job Title</label><input type="text" id="expJobTitle" name="expJobTitle" /></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="expStartDate">Start Date</label><input type="text" id="expStartDate" name="expStartDate" placeholder="e.g. Jan 2024" /></div>
+        <div class="field"><label for="expEndDate">End Date</label><input type="text" id="expEndDate" name="expEndDate" placeholder="e.g. Present / Dec 2024" /></div>
+      </div>
+      <div class="row">
+        <div class="field full"><label for="expDescription">Description of Work</label>
+          <textarea id="expDescription" name="expDescription" rows="3" placeholder="Key responsibilities and achievements..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- JOB PREFERENCES -->
+    <div class="section">
+      <h2>Job Preferences</h2>
+      <div class="row">
+        <div class="field"><label for="expectedSalary">Expected Salary (CTC)</label><input type="text" id="expectedSalary" name="expectedSalary" placeholder="e.g. 5 LPA / 50000/month" /></div>
+        <div class="field"><label for="currentCtc">Current CTC</label><input type="text" id="currentCtc" name="currentCtc" placeholder="e.g. 3 LPA / N/A" /></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="noticePeriod">Notice Period</label><input type="text" id="noticePeriod" name="noticePeriod" placeholder="e.g. Immediate / 30 days / 60 days" /></div>
+        <div class="field"><label for="availability">When are you available to join?</label><input type="text" id="availability" name="availability" placeholder="e.g. Immediately / 2 weeks" /></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="relocate">Willing to Relocate</label>
+          <select id="relocate" name="relocate">
+            <option value="">--Select--</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <div class="field"><label for="workAuth">Work Authorization</label><input type="text" id="workAuth" name="workAuth" placeholder="e.g. Indian Citizen / H1B" /></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="preferredLocation">Preferred Work Location</label><input type="text" id="preferredLocation" name="preferredLocation" placeholder="e.g. Bangalore, Remote" /></div>
+        <div class="field"><label for="jobType">Job Type</label>
+          <select id="jobType" name="jobType">
+            <option value="">--Select--</option>
+            <option value="Full-time">Full-time</option>
+            <option value="Part-time">Part-time</option>
+            <option value="Internship">Internship</option>
+            <option value="Contract">Contract</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESUME FILE UPLOAD -->
+    <div class="section">
+      <h2>Resume File (PDF / Word)</h2>
+      <p class="note">Upload your resume file (.pdf, .doc, .docx). When you click "Autofill Form" on job pages, the extension will automatically attach this file!</p>
+      <div class="row">
+        <div class="field full">
+          <label for="resumeFileInput">Select Resume Document</label>
+          <input type="file" id="resumeFileInput" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+        </div>
+      </div>
+      <div id="resume-info" class="resume-badge" style="display: none; margin-top: 10px; padding: 12px; background: #eef7ee; border: 1px solid #27ae60; border-radius: 6px;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div>
+            <strong id="resume-filename" style="color: #27ae60; font-size: 14px;">Resume Loaded</strong>
+            <div id="resume-details" style="font-size: 12px; color: #555; margin-top: 2px;"></div>
+          </div>
+          <button type="button" id="remove-resume-btn" style="background: #e74c3c; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">Remove</button>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 12px;">
+        <div class="field full"><label for="resumeNote">Resume Filename Note (Optional)</label><input type="text" id="resumeNote" name="resumeNote" placeholder="e.g. Priya_Resume_2026.pdf" /></div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button type="submit">Save Profile</button>
+      <div class="status" id="save-status"></div>
+    </div>
   </form>
   <script src="options.js"></script>
 </body>
